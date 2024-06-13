@@ -2,7 +2,7 @@
 
 This script converts a single glyph from a TrueType font to a PNG image using ImageMagick. It allows you to specify the font, glyph, color, and output file path.
 
-## Why ?
+## Why ??
 
 I made this small script to help me in displaying nerd font glyphs in [dunst](https://github.com/dunst-project/dunst) as dunst only has support for png's for notifcation icons.
 
@@ -23,7 +23,7 @@ chmod +x ttf2png.sh
 ## Usage
 
 ``` bash
-./ttf2png.sh -f FONT -g GLYPH -c COLOR -p OUTPUT
+ttf2png.sh -f FONT -g GLYPH -c COLOR -p OUTPUT
 ```
 - -f FONT: Name of the TTF font (without extension).
 - -g GLYPH: Glyph to convert.
@@ -33,13 +33,13 @@ chmod +x ttf2png.sh
 Example:
 
 ``` bash
-./ttf2png.sh -f Arial -g A -c #FF0000 -p output/A.png
+ttf2png -f "MononokiNerdFont-Bold" -g "󰦗" -p "/tmp/downloadicon"
 ```
 
 ## Color Source
 
 - If color provided explicitly then that color will be used for png foreground.  
-- If not, The script attempts to source colors from [`shwal`](https://github.com/tmpstpdwn/Shwal) or `pywal` if they are installed.
+- If not, The script attempts to source colors from [`shwal`](https://github.com/tmpstpdwn/Shwal) or [`pywal`](https://github.com/dylanaraps/pywal) if they are installed.
 - If neither of the above works then the default foreground color is set to #FFFFFF.
 
 ## License

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# checking for the existance of shwal/pywal
 shwal_path=~/.cache/shwal/colors.sh
 pywal_path=~/.cache/wal/colors.sh
 
@@ -12,6 +12,7 @@ else
     foreground="#FFFFFF"
 fi
 
+# Help text
 show_help() {
     echo
     echo "Usage: ttf2png -f FONT -g GLYPH -c COLOR -p OUTPUT"
@@ -32,6 +33,7 @@ show_help() {
     echo
 }
 
+# get opts
 while getopts f:g:c:p:h? flag
 do
     case "${flag}" in
@@ -44,7 +46,7 @@ do
     esac
 done
 
-# If no color is provided, use the foreground color from shwal
+# If no color is provided, use the foreground color from shwal / pywal
 if [ -z "$color" ]; then
     color=$foreground
 fi
