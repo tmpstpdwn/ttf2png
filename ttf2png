@@ -1,0 +1,67 @@
+#!/bin/bash
+
+
+shwal_path=~/.cache/shwal/colors.sh
+pywal_path=~/.cache/wal/colors.sh
+
+if [ -f "$shwal_path" ]; then
+    source "$shwal_path"
+elif [ -f "$pywal_path" ]; then
+    source "$pywal_path"
+else
+    foreground="#FFFFFF"
+fi
+
+show_help() {
+    echo
+    echo "Usage: ttf2png -f FONT -g GLYPH -c COLOR -p OUTPUT"
+    echo
+    echo "magick a TTF glyph to a PNG file."
+    echo
+    echo "Options:"
+    echo "  -f    TTF font name (without extension)"
+    echo "  -g    Glyph to magick"
+    echo "  -c    Color of the glyph (hex code) [optional]"
+    echo "  -p    Output file path"
+    echo "  -h    Show this help message and exit"
+    echo
+    echo "Note: Except for color all other args are required."
+    echo "      the colour is sourced from shwal colors.sh."
+    echo "      If you dont have shwal installed then color"
+    echo "      will be set to #FFFFFF"
+    echo
+}
+
+while getopts f:g:c:p:h? flag
+do
+    case "${flag}" in
+        f) font=${OPTARG} ;;
+        g) glyph=${OPTARG} ;;
+        c) color=${OPTARG} ;;
+        p) path=${OPTARG} ;;
+        h) show_help 
+            exit 0 ;;
+    esac
+done
+
+# If no color is provided, use the foreground color from shwal
+if [ -z "$color" ]; then
+    color=$foreground
+fi
+
+# Check if all variables are set
+if [ -z "$font" ] || [ -z "$glyph" ] || [ -z "$color" ] || [ -z "$path" ]; then
+    show_help
+    exit 1
+fi
+
+# Check if magick is present on system
+if ! command -v magick &> /dev/null; then
+    echo "Error: 'magick' command not found. ImageMagick is required."
+    exit 1
+fi
+
+# magick and save the png from given glyph
+magick -background none -fill "$color" -pointsize 72 -font /usr/share/fonts/TTF/"$font".ttf label:"$glyph" "$path".png
+
+# End
