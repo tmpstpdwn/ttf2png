@@ -12,13 +12,7 @@ I made this small script to help me in displaying nerd font glyphs in [dunst](ht
 
 ## Installation
 
-- No installation is required. Simply download the script and make it executable:
-
-``` bash
-chmod +x ttf2png.sh
-```
-
-- Also add the script to a directory under the `$PATH` variable for global access.
+move/copy `src/ttf2png` to a directory under `$PATH` varible for global access. 
 
 ## Usage
 
